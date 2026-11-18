@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080d1b" />
+  <meta name="description" content="ANOM — your tiny virtual AI companion." />
+  <title>ANOM — Virtual Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="ANOM home"><span class="brand-mark">A</span><span>ANOM<span class="brand-dot">.</span></span></a>
+      <div class="status-pill"><span class="status-light"></span><span id="statusText">Online · ready to hang out</span></div>
+      <button class="icon-button" id="settingsButton" aria-label="Open settings" title="Settings">⚙</button>
+    </header>
+
+    <section class="hero-grid" id="home">
+      <section class="bot-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">YOUR LITTLE COMPANION</p><h1>Hey, I'm <span>ANOM</span><span class="wave">✦</span></h1><p class="subheading">A tiny robot with a big personality.</p></div><span class="mood-tag" id="moodTag">☺ HAPPY</span></div>
+        <div class="robot-stage" id="robotStage">
+          <div class="stage-orbit orbit-a"></div><div class="stage-orbit orbit-b"></div><div class="stage-glow"></div>
+          <canvas id="robotCanvas" aria-label="Animated 3D ANOM robot"></canvas>
+          <div class="stage-caption"><span class="pulse-dot"></span><span id="robotCaption">Just vibing in my little world</span></div>
+        </div>
+        <div class="quick-actions">
+          <button class="action-chip" data-action="wave">👋 Wave</button><button class="action-chip" data-action="dance">🪩 Dance</button><button class="action-chip" data-action="sleep">🌙 Sleep</button><button class="action-chip" data-action="happy">✨ Cheer up</button>
+        </div>
+      </section>
+
+      <section class="chat-panel panel">
+        <div class="chat-heading"><div><p class="eyebrow">LET'S TALK</p><h2>Chat with ANOM</h2></div><span class="ai-label">✧ AI COMPANION</span></div>
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <div class="message bot-message"><div class="avatar">A</div><div class="bubble-wrap"><span class="sender">ANOM <time>now</time></span><div class="bubble">Hiiii! I'm ANOM 🤖 It's really nice to meet you. Want to talk, play a game, or just chill together?</div></div></div>
+        </div>
+        <div class="suggestions"><button class="suggestion">Tell me a fun fact</button><button class="suggestion">Let's play a game</button><button class="suggestion">How are you feeling?</button></div>
+        <form class="chat-composer" id="chatForm"><button class="round-tool" type="button" id="micButton" title="Speak to ANOM" aria-label="Speak to ANOM">🎙</button><input id="chatInput" autocomplete="off" placeholder="Message your little buddy…" maxlength="1200" /><button class="send-button" type="submit" aria-label="Send message">➤</button></form>
+        <p class="composer-note" id="composerNote">Your memories stay in this browser. AI replies need a connected backend.</p>
+      </section>
+    </section>
+
+    <section class="lower-grid">
+      <section class="panel feature-panel"><div class="section-title"><div><p class="eyebrow">MAKE SOME MEMORIES</p><h2>Play with ANOM</h2></div><span class="tiny-icon">✦</span></div>
+        <div class="game-grid"><button class="game-card" data-game="guess"><span class="game-icon purple">🔢</span><span><b>Number Quest</b><small>Guess my secret number</small></span><span class="card-arrow">↗</span></button><button class="game-card" data-game="reaction"><span class="game-icon blue">⚡</span><span><b>Reaction Rush</b><small>Test your reflexes</small></span><span class="card-arrow">↗</span></button><button class="game-card" data-game="memory"><span class="game-icon pink">🧠</span><span><b>Color Memory</b><small>Repeat my color sequence</small></span><span class="card-arrow">↗</span></button></div>
+      </section>
+      <section class="panel memory-panel"><div class="section-title"><div><p class="eyebrow">A LITTLE ABOUT YOU</p><h2>My memory bank</h2></div><span class="memory-count" id="memoryCount">0 saved</span></div><p class="memory-intro">Things you teach me are saved on this device, so I can remember them next time.</p><div class="memory-input-row"><input id="memoryInput" placeholder="e.g. My favourite colour is blue" maxlength="180"/><button id="saveMemoryButton">Save</button></div><ul class="memory-list" id="memoryList"><li class="empty-memory">No memories yet. Teach me something! 💙</li></ul></section>
+    </section>
+    <footer><span>Made with curiosity <span class="heart">♥</span></span><span>ANOM v1.0 · Your companion, your rules</span></footer>
+  </main>
+
+  <dialog id="settingsDialog" class="modal"><form method="dialog" class="modal-card"><div class="modal-head"><div><p class="eyebrow">MAKE ME YOURS</p><h2>ANOM settings</h2></div><button class="icon-button" aria-label="Close">✕</button></div><label>Robot color<select id="colorSelect"><option value="#77d8ff">Ice blue</option><option value="#b69cff">Lavender</option><option value="#ff9fc9">Bubblegum</option><option value="#9ce6b0">Mint</option><option value="#ffc77d">Sunshine</option></select></label><label>Personality<select id="personalitySelect"><option value="friendly">Friendly & playful</option><option value="curious">Curious explorer</option><option value="calm">Calm & thoughtful</option><option value="cheeky">Cheeky & funny</option></select></label><label class="toggle-row"><span>Speak replies aloud</span><input type="checkbox" id="speakToggle" checked /></label><label class="toggle-row"><span>Reduce motion</span><input type="checkbox" id="motionToggle" /></label><p class="settings-hint">AI backend: <code>/api/chat</code>. Add your API key on the server, never in this page.</p><button class="primary-button" value="close">Done</button></form></dialog>
+
+  <dialog id="gameDialog" class="modal"><form method="dialog" class="modal-card game-modal"><div class="modal-head"><div><p class="eyebrow">PLAY TIME</p><h2 id="gameTitle">Mini-game</h2></div><button class="icon-button" aria-label="Close">✕</button></div><div id="gameContent" class="game-content"></div></form></dialog>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
